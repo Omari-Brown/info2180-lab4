@@ -2,22 +2,25 @@
 
 window.onload=function()
 {
-    /*alert("window loaded");*/
+    console.log("Window loaded");
     var searchbutton = document.getElementById("search");
+    var searchresult = document.getElementById("result");
     searchbutton.addEventListener("click", function ()
     {
-        //fetch(http://localhost/info2180-lab4/superheroes.php)
-        //fetch("http://localhost/info2180-lab4/helloworld.php")
-        fetch("superheroes.php")
-        //fetch('http://localhost/info2180-lab4/superheroes2.php')
+        //event.preventDefault();
+        var searchvalue = document.getElementById("searchinput").value.trim();
+        console.log(`Search value is ${searchvalue}`);
+        console.log(`Length is: ${searchvalue.length}`);
+        fetch(`superheroes.php?query=${searchvalue}`)
         //fetch("http://localhost/info2180-lab4/superheroes.php")
             .then(console.log("Fetching"))
             .then(response => response.text())
-            .then(data => alert(data))
+            .then(data => searchresult.innerHTML = data)
             .catch(error => 
             {
                 console.log("There was an error");
                 console.log(error);
             });
     });
+    
 };
